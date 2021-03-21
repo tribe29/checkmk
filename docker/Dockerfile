@@ -37,6 +37,7 @@ RUN set -e \
     && apt-get install -y --no-install-recommends \
         ca-certificates \
         postfix \
+        libsasl2-modules \
         inetutils-syslogd \
         bsd-mailx \
         gnupg2 \
