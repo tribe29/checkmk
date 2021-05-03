@@ -1,0 +1,15 @@
+title: Check CRL expiry
+agents: active
+catalog: agentless
+license: GPL
+distribution: check_mk
+
+item:
+ The URL of the given CRL
+
+description:
+ This check screens the remaining validity of a CRL. 
+ The Check can go into warning or critical if the remaining time
+ is too short.
+ The default tresholds are 7 days for warning and 
+ 2 days for criticial.

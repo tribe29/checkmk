@@ -2517,3 +2517,33 @@ rulespec_registry.register(
         name="active_checks:elasticsearch_query",
         valuespec=_valuespec_active_checks_elasticsearch_query,
     ))
+
+
+def _valuespec_active_checks_crl() -> Dictionary:
+    return Dictionary(
+        title=_("Check CRL expiry"),
+        help=_("Checks if a Certificate Revocation List is still valid"),
+        optional_keys=[],
+        elements=[("time",
+                   Tuple(title=_("Time left"),
+                         help=_("These levels make the check go warning or critical whenever the "
+                                "remaining validity of the monitored CRL is too low."),
+                         elements=[
+                             Age(title=_("warning at"),
+                                 display=["days", "hours", "minutes"],
+                                 default_value=604800),
+                             Age(title=_("critical at"),
+                                 display=["days", "hours", "minutes"],
+                                 default_value=172800)
+                         ])),
+                  ("url", TextAscii(title=_('Certificate Revocation List URL'),
+                                    allow_empty=False))])
+
+
+rulespec_registry.register(
+    HostRulespec(
+        group=RulespecGroupActiveChecks,
+        match_type="all",
+        name="active_checks:crl",
+        valuespec=_valuespec_active_checks_crl,
+    ))
